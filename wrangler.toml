@@ -1,0 +1,21 @@
+name = "fork_backend"
+compatibility_date = "2024-08-02"
+
+# [vars]
+# MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "folk"
+database_id = "3c8fe14c-5f83-4f9a-909e-1ac541cebd3b"
+
+# [ai]
+# binding = "AI"

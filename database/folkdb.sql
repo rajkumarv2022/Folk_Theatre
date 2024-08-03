@@ -1,0 +1,57 @@
+CREATE TABLE sellers_signup (
+    seller_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    pincode VARCHAR(10) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE buyers_signup (
+    buyer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    pincode VARCHAR(10) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CREATE TABLE book (
+--     seller_id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     buyer_id INTEGER,
+--     book TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     status BOOLEAN DEFAULT 0
+-- );
+
+CREATE TABLE cart (
+    cart_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    seller_id INTEGER,
+    profession TEXT NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE book (
+    seller_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    buyer_id INTEGER,
+    profession TEXT,
+    start_date DATETIME,
+    end_date DATETIME,
+    book TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status BOOLEAN DEFAULT 0
+);
+
+CREATE TABLE payment (
+    payment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    booking_id INTEGER,
+    amount DECIMAL(10, 2) NOT NULL,
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payment_method TEXT NOT NULL,
+    status BOOLEAN DEFAULT 0
+);
+
+
+
