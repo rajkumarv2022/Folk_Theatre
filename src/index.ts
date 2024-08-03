@@ -115,6 +115,80 @@ app.post('/folk/create',async (c) => {
   }
 })
 
+//get cart by seller_id
+
+app.get('/fork/cart/get-id',async (c) => {
+  const{seller_id}=await c.req.json();
+  const rows = await c.env.DB.prepare(`SELECT * FROM cart WHERE seller_id=?`).bind(seller_id).all();
+  return c.json(rows);
+} )
+
+//get cart by proffosion
+app.get('/fork/cart/get-profession',async (c) => {
+  const{profession}=await c.req.json();
+  const rows = await c.env.DB.prepare(`SELECT * FROM cart WHERE profession=?`).bind(profession).all();
+  return c.json(rows);
+} )
+
+//get all cart
+app.get('/fork/cart/get-all',async (c) => {
+  const rows = await c.env.DB.prepare(`SELECT * FROM cart`).all();
+  return c.json(rows);
+} )
+
+//delete cart by id
+
+app.delete('/fork/cart/delete/:id',async (c) => {
+  const id = await c.req.param('id');
+  const {success} = await c.env.DB.prepare(`DELETE FROM cart WHERE cart_id=?`).bind(id).run();
+  if(success)
+  {
+    return c.text("success");
+  }
+  else
+  {
+    return c.text("failed");
+  }
+} )
+
+//delete all cart
+
+app.delete('/fork/cart/delete-all/:id',async (c) => {
+  const id = await c.req.param('id');
+  const {success} = await c.env.DB.prepare(`DELETE FROM cart WHERE seller_id =?`).bind(id).run();
+  if(success)
+  {
+    return c.text("success");
+  }
+  else
+  {
+    return c.text("failed");
+  }
+} )
+
+//update cart by id
+
+app.put('/fork/cart/update/:id', async (c) => {
+  try {
+    const id = c.req.param('id'); // Retrieve the id from the URL parameter
+    const { profession } = await c.req.json(); // Retrieve the profession from the request body
+
+    if (!id || !profession) {
+      return c.json({ error: 'Invalid input' }, 400); // Return 400 Bad Request for invalid input
+    }
+
+    const { success } = await c.env.DB.prepare(`UPDATE cart SET profession = ? WHERE cart_id = ?`).bind(profession, id).run();
+
+    if (success) {
+      return c.text("success");
+    } else {
+      return c.text("failed");
+    }
+  } catch (error) {
+    console.error(error);
+    return c.json({ error: 'Failed to update cart' }, 500); // Return 500 Internal Server Error
+  }
+});
 
 
 app.get('/', (c) => {
