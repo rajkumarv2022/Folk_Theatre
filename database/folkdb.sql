@@ -35,12 +35,24 @@ CREATE TABLE buyers_signup (
 --     status BOOLEAN DEFAULT 0
 -- );
 
-CREATE TABLE cart (
+-- CREATE TABLE cart (
+--     cart_id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     seller_id INTEGER,
+--     profession TEXT NOT NULL,
+--     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
+CREATE TABLE new_cart (
     cart_id INTEGER PRIMARY KEY AUTOINCREMENT,
     seller_id INTEGER,
-    profession TEXT NOT NULL,
+    name TEXT,
+    profession TEXT,
+    gender TEXT,
+    price REAL,
+    imgurl TEXT,
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE book (
     book_id INTEGER PRIMARY KEY AUTOINCREMENT,
